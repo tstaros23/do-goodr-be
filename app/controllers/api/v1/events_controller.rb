@@ -7,7 +7,7 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     event = Event.create(event_params)
-    render json: EventSerializer.format_json(event), status: 201
+    render json: EventSerializer.format_new(event), status: 201
   end
 
   private

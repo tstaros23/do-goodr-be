@@ -1,29 +1,35 @@
 class EventSerializer
 
-  def self.format_json(event)
+  def self.format_new(event)
     {
       type: 'event',
-      data: format_event(event)
+      data:
+          [
+            {
+            name: event.name,
+            category: event.category,
+            address: event.address,
+            description: event.description,
+            vols_required: event.vols_required
+          }
+        ]
     }
   end
 
-  def self.format_event(event)
-    if event.is_a?(Array)
-      collection = event.flatten
-    else
-      collection = [event]
-    end
-    # require "pry"; binding.pry
-    collection.map do |obj|
-      {
-        organization_id: obj.organization_id,
-        name: obj.name,
-        category: obj.category,
-        address: obj.address,
-        description: obj.description,
-        vols_required: obj.vols_required
-      }
-    end
-  end
-
+  # def self.format_get(event)
+  #   {
+  #     type: 'event',
+  #     data:
+  #         [
+  #           {
+  #           name: event.name,
+  #           category: event.category,
+  #           address: event.address,
+  #           description: event.description,
+  #           vols_required: event.vols_required
+  #         }
+  #       ]
+  #       end
+  #   }
+  # end
 end
