@@ -1,9 +1,11 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/app/models/organization.rb": {
+      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/app/models/event.rb": {
         "lines": [
           1,
+          1,
+          null,
           1,
           null,
           1,
@@ -18,11 +20,69 @@
           null
         ]
       },
-      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/app/models/event.rb": {
+      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/spec/models/organization_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/app/models/organization.rb": {
         "lines": [
           1,
           1,
           null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/theodorestaros/turing/mod3/projects/do-goodr-be/spec/requests/api/v1/event_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
           1,
           null,
           1,
@@ -35,8 +95,8 @@
           1,
           null,
           1,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           1,
@@ -79,12 +139,13 @@
           null,
           null,
           null,
+          1,
+          null,
+          1,
           null,
           null,
           null,
-          null,
-          null,
-          null,
+          2,
           null,
           null,
           null,
@@ -99,6 +160,6 @@
         ]
       }
     },
-    "timestamp": 1644008077
+    "timestamp": 1644009133
   }
 }

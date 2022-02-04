@@ -2,12 +2,12 @@ class Api::V1::EventsController < ApplicationController
 
   def index
     events = Event.all
-    j = render json: EventSerializer.format_json(events), status: 201
+    j = render json: EventSerializer.format_get(events), status: :ok
   end
 
   def create
     event = Event.create(event_params)
-    render json: EventSerializer.format_new(event), status: 201
+    j = render json: EventSerializer.format_new(event), status: :created
   end
 
   private
