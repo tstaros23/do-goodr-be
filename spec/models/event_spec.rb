@@ -8,6 +8,7 @@ RSpec.describe Event, type: :model do
     it { should validate_presence_of :address }
     it { should validate_presence_of :description }
     it { should validate_presence_of :vols_required }
+    it { should validate_presence_of :organization_id }
   end
 
   describe 'relationships' do
