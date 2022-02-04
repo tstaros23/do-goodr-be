@@ -32,5 +32,6 @@ RSpec.describe 'Event API' do
     expect(response.status).to eq(200)
 
     items = JSON.parse(response.body, symbolize_names: true)
+    
   end
 end
