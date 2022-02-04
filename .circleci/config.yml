@@ -44,7 +44,22 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/bundle-install
+      - restore_cache:
+          keys:
+            - fast-inlet-74665-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - fast-inlet-74665-bundle-v2-
+      - run: # Install Ruby dependencies
+          name: Bundle Install
+          command: bundle install
+      # Store bundle cache for Ruby dependencies
+      - save_cache:
+          key: fast-inlet-74665-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle      
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
       - run: sudo apt install -y postgresql-client || true
       - run:
           name: Setup DB
