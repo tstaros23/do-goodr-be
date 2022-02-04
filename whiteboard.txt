@@ -1,0 +1,4 @@
+TO DO LIST
+-Implement CircleCI
+-Make a PR Template
+-Build out tests for edge cases and sad paths
