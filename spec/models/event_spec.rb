@@ -27,6 +27,12 @@ RSpec.describe Event, type: :model do
         expect(Event.future_events).to eq([event2])
       end
     end
+
+    describe '.distance_filter' do
+      it 'returns only events within distance radius' do
+        
+      end
+    end
   end
 
 end
