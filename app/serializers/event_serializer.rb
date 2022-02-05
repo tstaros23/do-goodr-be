@@ -1,6 +1,7 @@
 class EventSerializer
 
   def self.format_new(event)
+    
     {
       type: 'event',
       data:
@@ -31,7 +32,7 @@ class EventSerializer
             description: obj.description,
             vols_required: obj.vols_required,
             start_time: obj.start_time,
-            duration: obj.duration            
+            duration: obj.duration
           }
 
         end
