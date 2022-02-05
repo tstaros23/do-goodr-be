@@ -1,7 +1,7 @@
 class Api::V1::EventsController < ApplicationController
 
   def index
-    events = Event.all
+    events = Event.future_events
     j = render json: EventSerializer.format_get(events), status: :ok
   end
 

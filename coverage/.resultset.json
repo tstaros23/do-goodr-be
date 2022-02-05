@@ -1,9 +1,15 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/models/organization.rb": {
+      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/models/event.rb": {
         "lines": [
           1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
           1,
           null,
           1,
@@ -18,92 +24,37 @@
           null
         ]
       },
-      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/models/event.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/controllers/api/v1/events_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/serializers/event_serializer.rb": {
+      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/spec/models/organization_spec.rb": {
         "lines": [
           1,
           null,
           1,
           null,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
+          2,
+          2,
+          2,
           2,
           null,
           null,
+          1,
+          2,
           null,
           null,
+          null
+        ]
+      },
+      "/Users/matthewholmes/turing/mod_4/projects/do-goodr-be/app/models/organization.rb": {
+        "lines": [
+          1,
+          1,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1644094022
+    "timestamp": 1644096760
   }
 }
