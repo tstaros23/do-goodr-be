@@ -10,7 +10,9 @@ class EventSerializer
             category: event.category,
             address: event.address,
             description: event.description,
-            vols_required: event.vols_required
+            vols_required: event.vols_required,
+            start_time: event.start_time,
+            duration: event.duration
           }
         ]
     }
@@ -27,9 +29,11 @@ class EventSerializer
             category: obj.category,
             address: obj.address,
             description: obj.description,
-            vols_required: obj.vols_required
+            vols_required: obj.vols_required,
+            start_time: obj.start_time,
+            duration: obj.duration            
           }
-        
+
         end
     }
   end
