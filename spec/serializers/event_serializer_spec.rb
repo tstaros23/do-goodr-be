@@ -5,7 +5,9 @@ RSpec.describe EventSerializer, type: :serializer do
   describe '.format_new' do
     it 'returns a serialized hash' do
       organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
-      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
+
+      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+
 
       event_hash = EventSerializer.format_new(event1)
 
@@ -19,8 +21,10 @@ RSpec.describe EventSerializer, type: :serializer do
       expect(event_hash[:data].first).to have_key(:address)
       expect(event_hash[:data].first).to have_key(:description)
       expect(event_hash[:data].first).to have_key(:vols_required)
+
+      expect(event_hash[:data].first).to have_key(:date)
       expect(event_hash[:data].first).to have_key(:start_time)
-      expect(event_hash[:data].first).to have_key(:duration)
+      expect(event_hash[:data].first).to have_key(:end_time)
 
     end
   end
@@ -28,9 +32,11 @@ RSpec.describe EventSerializer, type: :serializer do
   describe '.format_get' do
     it 'returns a serialized hash' do
       organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
-      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '5280 Wadsworth Blvd, Arvada CO', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-      event3 = Event.create!(name: 'Homeless Living', category: 2, address: '2136 Champa St, Denver, CO 80205', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
+
+      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '5280 Wadsworth Blvd, Arvada CO', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+      event3 = Event.create!(name: 'Homeless Living', category: 2, address: '2136 Champa St, Denver, CO 80205', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+
 
       event_hash = EventSerializer.format_get([event1,event2,event3])
 
@@ -44,8 +50,11 @@ RSpec.describe EventSerializer, type: :serializer do
       expect(event_hash[:data].first).to have_key(:address)
       expect(event_hash[:data].first).to have_key(:description)
       expect(event_hash[:data].first).to have_key(:vols_required)
+
+      expect(event_hash[:data].first).to have_key(:date)
       expect(event_hash[:data].first).to have_key(:start_time)
-      expect(event_hash[:data].first).to have_key(:duration)
+      expect(event_hash[:data].first).to have_key(:end_time)
+
 
     end
   end
@@ -53,9 +62,11 @@ RSpec.describe EventSerializer, type: :serializer do
   describe '.format_search' do
     it 'returns a serialized hash' do
       organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
-      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '5280 Wadsworth Blvd, Arvada CO', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-      event3 = Event.create!(name: 'Homeless Living', category: 2, address: '2136 Champa St, Denver, CO 80205', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
+
+      event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '5280 Wadsworth Blvd, Arvada CO', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+      event3 = Event.create!(name: 'Homeless Living', category: 2, address: '2136 Champa St, Denver, CO 80205', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+
       events = [{distance: 1, event: event1}, {distance: 2, event: event2}, {distance: 3, event: event3}, ]
 
       event_hash = EventSerializer.format_search(events)
@@ -71,8 +82,11 @@ RSpec.describe EventSerializer, type: :serializer do
       expect(event_hash[:data].first).to have_key(:address)
       expect(event_hash[:data].first).to have_key(:description)
       expect(event_hash[:data].first).to have_key(:vols_required)
+
+      expect(event_hash[:data].first).to have_key(:date)
       expect(event_hash[:data].first).to have_key(:start_time)
-      expect(event_hash[:data].first).to have_key(:duration)
+      expect(event_hash[:data].first).to have_key(:end_time)
+
 
     end
   end

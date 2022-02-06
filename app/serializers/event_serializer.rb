@@ -11,8 +11,9 @@ class EventSerializer
             address: event.address,
             description: event.description,
             vols_required: event.vols_required,
-            start_time: event.start_time,
-            duration: event.duration
+            date: Time.at(event.start_time).strftime('%m/%d/%Y'),
+            start_time: Time.at(event.start_time).strftime('%I:%M %p'),
+            end_time: Time.at(event.end_time).strftime('%I:%M %p')
           }
         ]
     }
@@ -30,8 +31,9 @@ class EventSerializer
             address: obj.address,
             description: obj.description,
             vols_required: obj.vols_required,
-            start_time: obj.start_time,
-            duration: obj.duration
+            date: Time.at(obj.start_time).strftime('%m/%d/%Y'),
+            start_time: Time.at(obj.start_time).strftime('%I:%M %p'),
+            end_time: Time.at(obj.end_time).strftime('%I:%M %p')
           }
         end
     }
@@ -50,8 +52,9 @@ class EventSerializer
             address: obj[:event].address,
             description: obj[:event].description,
             vols_required: obj[:event].vols_required,
-            start_time: obj[:event].start_time,
-            duration: obj[:event].duration
+            date: Time.at(obj[:event].start_time).strftime('%m/%d/%Y'),
+            start_time: Time.at(obj[:event].start_time).strftime('%I:%M %p'),
+            end_time: Time.at(obj[:event].end_time).strftime('%I:%M %p')
           }
         end
     }

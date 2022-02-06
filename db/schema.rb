@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_230149) do
     t.string "description"
     t.integer "vols_required"
     t.datetime "start_time"
-    t.integer "duration"
+    t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_events_on_organization_id"
