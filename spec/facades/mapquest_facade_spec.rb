@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Mapquest Facade' do
+RSpec.describe MapquestFacade, type: :facade do
   describe '.distance' do
     it 'returns the distance between two points' do
       expect(MapquestFacade.distance('80001', '5200 Wadsworth Blvd, Arvada CO')).to be_a Float
