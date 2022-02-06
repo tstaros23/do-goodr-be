@@ -1,7 +1,6 @@
 class EventSerializer
 
   def self.format_new(event)
-    
     {
       type: 'event',
       data:
@@ -19,11 +18,11 @@ class EventSerializer
     }
   end
 
-  def self.format_get(event)
+  def self.format_get(events)
     {
       type: 'event',
       data:
-          event.map do |obj|
+          events.map do |obj|
           {
             organization_id: obj.organization_id,
             name: obj.name,
@@ -34,7 +33,26 @@ class EventSerializer
             start_time: obj.start_time,
             duration: obj.duration
           }
+        end
+    }
+  end
 
+  def self.format_search(events)
+    {
+      type: 'event',
+      data:
+          events.map do |obj|
+          {
+            distance: obj[:distance],
+            organization_id: obj[:event].organization_id,
+            name: obj[:event].name,
+            category: obj[:event].category,
+            address: obj[:event].address,
+            description: obj[:event].description,
+            vols_required: obj[:event].vols_required,
+            start_time: obj[:event].start_time,
+            duration: obj[:event].duration
+          }
         end
     }
   end

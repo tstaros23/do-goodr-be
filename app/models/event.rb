@@ -11,7 +11,7 @@ class Event < ApplicationRecord
 
   def self.distance_filter(zip, distance)
     events = MapquestFacade.event_search(zip, distance)
-    events.filter_map do |event|
+    e = events.filter_map do |event|
       if event[:distance] < distance.to_f
         event
       end
