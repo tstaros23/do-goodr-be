@@ -1,3 +1,6 @@
+require 'date'
+require 'time'
+
 class EventSerializer
 
   def self.format_new(event)
@@ -35,6 +38,7 @@ class EventSerializer
           }
         end
     }
+    require "pry"; binding.pry
   end
 
   def self.format_search(events)
