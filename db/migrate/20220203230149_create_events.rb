@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :vols_required
       t.datetime :start_time
-      t.integer :duration
+      t.integer :
 
       t.timestamps
     end

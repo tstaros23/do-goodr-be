@@ -12,7 +12,7 @@ class EventSerializer
             description: event.description,
             vols_required: event.vols_required,
             start_time: event.start_time,
-            duration: event.duration
+            end_time: event.end_time
           }
         ]
     }
@@ -31,7 +31,7 @@ class EventSerializer
             description: obj.description,
             vols_required: obj.vols_required,
             start_time: obj.start_time,
-            duration: obj.duration
+            end_time: obj.end_time
           }
         end
     }
@@ -51,7 +51,7 @@ class EventSerializer
             description: obj[:event].description,
             vols_required: obj[:event].vols_required,
             start_time: obj[:event].start_time,
-            duration: obj[:event].duration
+            end_time: obj[:event].end_time
           }
         end
     }
