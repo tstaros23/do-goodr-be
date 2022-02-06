@@ -8,4 +8,13 @@ class Event < ApplicationRecord
   def self.future_events
     where "start_time > ? ", DateTime.now
   end
+
+  def self.distance_filter(zip, distance)
+    events = MapquestFacade.event_search(zip, distance)
+    e = events.filter_map do |event|
+      if event[:distance] < distance.to_f
+        event
+      end
+    end
+  end
 end
