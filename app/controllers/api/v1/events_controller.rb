@@ -8,7 +8,6 @@ class Api::V1::EventsController < ApplicationController
   def create
     event = Event.create(event_params)
     j = render json: EventSerializer.format_new(event), status: :created
-    # require "pry"; binding.pry
   end
 
   private
