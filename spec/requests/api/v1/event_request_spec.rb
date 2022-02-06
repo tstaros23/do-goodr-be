@@ -12,7 +12,7 @@ RSpec.describe 'Event API' do
         description: "Give us your blood",
         vols_required: 50,
         start_time: "2022-12-31 13:00",
-        end_time: 2
+        end_time: "2022-12-31 14:00"
       }
       headers = {"CONTENT_TYPE" => "application/json"}
       created_event = Event.last
@@ -27,8 +27,8 @@ RSpec.describe 'Event API' do
   describe 'GET /api/v1/events' do
     it "should get a list of events" do
       organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
-      event = Event.create!(name: 'Soup Kitchen', category: 1, address: '11 Revere', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: 2)
-      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '12 Colfax', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: 2)
+      event = Event.create!(name: 'Soup Kitchen', category: 1, address: '11 Revere', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
+      event2 = Event.create!(name: 'Blood Drive', category: 2, address: '12 Colfax', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
 
       get "/api/v1/events"
 
