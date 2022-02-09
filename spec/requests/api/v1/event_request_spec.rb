@@ -4,7 +4,7 @@ RSpec.describe 'Event API' do
   describe 'POST /api/v1/events' do
     it 'should create a new event if given valid params' do
       organization = create(:organization)
-      
+
       event_params = {
         organization_id: organization.id,
         name: "Blood Drive",
@@ -27,8 +27,16 @@ RSpec.describe 'Event API' do
 
   describe 'GET /api/v1/events' do
     it "should get a list of events" do
+
       organization = create(:organization)
       create_list(:event, 3, organization: organization)
+
+      # organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
+      # event = Event.create!(name: 'Soup Kitchen', category: 1, address: '11 Revere', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
+      # event2 = Event.create!(name: 'Blood Drive', category: 2, address: '12 Colfax', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
+
+      # org = create :organization
+      # event1 = create :event, { organization: org, address: "5200 Wadsworth Blvd, Arvada CO 80001"}
 
       get "/api/v1/events"
 
@@ -36,7 +44,51 @@ RSpec.describe 'Event API' do
       expect(response.status).to eq(200)
 
       items = JSON.parse(response.body, symbolize_names: true)
+    end
+  end
 
+  describe 'GET /api/v1/events/:id' do
+    it "should return a single event" do
+      organization = create(:organization)
+      event = create :event, { organization: organization }
+
+      get "/api/v1/events/#{event.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe 'GET /api/v1/events/:id' do
+    it "should update an event" do
+      organization = create(:organization)
+      event = create :event, { organization: organization }
+
+      event_params = {
+        name: "Edited Event",
+        vols_required: 50,
+      }
+
+      expect(event.name).to_not eq("Edited Event")
+
+      patch "/api/v1/events/#{event.id}", params: event_params
+      json_event = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(json_event[:data][0][:name]).to eq("Edited Event")
+    end
+  end
+
+  describe 'DELETE /api/v1/events/:id' do
+    it "should delete an event" do
+      organization = create(:organization)
+      event = create :event, { organization: organization }
+
+      delete "/api/v1/events/#{event.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
     end
   end
 end

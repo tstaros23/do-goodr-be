@@ -16,5 +16,8 @@ class Event < ApplicationRecord
         event
       end
     end
+    e.sort_by do |k|
+      k[:distance]
+    end
   end
 end
