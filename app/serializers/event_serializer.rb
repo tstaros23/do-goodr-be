@@ -1,6 +1,6 @@
 class EventSerializer
 
-  def self.format_new(event)
+  def self.format_single(event)
     {
       type: 'event',
       data:
@@ -19,7 +19,7 @@ class EventSerializer
     }
   end
 
-  def self.format_get(events)
+  def self.format_multiple(events)
     {
       type: 'event',
       data:

@@ -2,12 +2,27 @@ class Api::V1::EventsController < ApplicationController
 
   def index
     events = Event.future_events
-    j = render json: EventSerializer.format_get(events), status: :ok
+    render json: EventSerializer.format_multiple(events), status: :ok
+  end
+
+  def show
+    event = Event.find(params[:id])
+    render json: EventSerializer.format_single(event), status: :ok
   end
 
   def create
     event = Event.create(event_params)
-    j = render json: EventSerializer.format_new(event), status: :created
+    render json: EventSerializer.format_single(event), status: :created
+  end
+
+  def update
+    event = Event.update(params[:id], event_params)
+    render json: EventSerializer.format_single(event), status: :ok
+  end
+
+  def destroy
+    event = Event.destroy(params[:id])
+    render json: EventSerializer.format_single(event), status: :ok
   end
 
   private

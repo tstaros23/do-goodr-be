@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post '/events', controller: :events, action: :create
-      get '/events', controller: :events, action: :index
+      resources :events
 
       get '/search', controller: :search, action: :index
     end
