@@ -5,7 +5,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :category
       t.string :address
-      t.string :description
+      t.string :phone
+      t.text :description
       t.integer :vols_required
       t.datetime :start_time
       t.datetime :end_time
