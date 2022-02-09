@@ -11,8 +11,14 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    event = Event.create(event_params)
-    render json: EventSerializer.format_single(event), status: :created
+    @event = Event.new(event_params)
+    organization = @event.organization
+    if @event.save
+      EventMailer.with(event: @event, organization: organization).new_event_email.deliver_later
+      render json: EventSerializer.format_single(@event), status: :created
+    else
+      render json: {errors: {details: "Fill in correct information"}}
+    end
   end
 
   def update
