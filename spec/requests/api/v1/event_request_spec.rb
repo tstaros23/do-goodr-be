@@ -58,4 +58,37 @@ RSpec.describe 'Event API' do
       expect(response.status).to eq(200)
     end
   end
+
+  describe 'GET /api/v1/events/:id' do
+    it "should update an event" do
+      organization = create(:organization)
+      event = create :event, { organization: organization }
+
+      event_params = {
+        name: "Edited Event",
+        vols_required: 50,
+      }
+
+      expect(event.name).to_not eq("Edited Event")
+
+      patch "/api/v1/events/#{event.id}", params: event_params
+      json_event = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(json_event[:data][0][:name]).to eq("Edited Event")
+    end
+  end
+
+  describe 'DELETE /api/v1/events/:id' do
+    it "should delete an event" do
+      organization = create(:organization)
+      event = create :event, { organization: organization }
+
+      delete "/api/v1/events/#{event.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+    end
+  end
 end

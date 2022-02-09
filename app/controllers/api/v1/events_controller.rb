@@ -13,7 +13,16 @@ class Api::V1::EventsController < ApplicationController
   def create
     event = Event.create(event_params)
     render json: EventSerializer.format_single(event), status: :created
-    # require "pry"; binding.pry
+  end
+
+  def update
+    event = Event.update(params[:id], event_params)
+    render json: EventSerializer.format_single(event), status: :ok
+  end
+
+  def destroy
+    event = Event.destroy(params[:id])
+    render json: EventSerializer.format_single(event), status: :ok
   end
 
   private
