@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :events
+      resources :organizations do
+        resources :events, only: [:index], controller: :org_events
+      end
+      # resources :org_users
+      # resources :sessions, only: :create
       get '/search', controller: :search, action: :index
     end
   end

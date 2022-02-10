@@ -59,7 +59,7 @@ RSpec.describe 'Event API' do
     end
   end
 
-  describe 'GET /api/v1/events/:id' do
+  describe 'PATCH /api/v1/events/:id' do
     it "should update an event" do
       organization = create(:organization)
       event = create :event, { organization: organization }
