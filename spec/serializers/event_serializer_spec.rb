@@ -14,6 +14,7 @@ RSpec.describe EventSerializer, type: :serializer do
 
       expect(event_hash).to have_key(:data)
       expect(event_hash[:data].size).to eq(1)
+      expect(event_hash[:data].first).to have_key(:id)
       expect(event_hash[:data].first).to have_key(:name)
       expect(event_hash[:data].first).to have_key(:category)
       expect(event_hash[:data].first).to have_key(:address)
@@ -40,6 +41,7 @@ RSpec.describe EventSerializer, type: :serializer do
 
       expect(event_hash).to have_key(:data)
       expect(event_hash[:data].size).to eq(3)
+      expect(event_hash[:data].first).to have_key(:id)
       expect(event_hash[:data].first).to have_key(:name)
       expect(event_hash[:data].first).to have_key(:category)
       expect(event_hash[:data].first).to have_key(:address)
@@ -68,6 +70,7 @@ RSpec.describe EventSerializer, type: :serializer do
       expect(event_hash).to have_key(:data)
       expect(event_hash[:data].size).to eq(3)
       expect(event_hash[:data].first).to have_key(:distance)
+      expect(event_hash[:data].first).to have_key(:id)
       expect(event_hash[:data].first).to have_key(:name)
       expect(event_hash[:data].first).to have_key(:category)
       expect(event_hash[:data].first).to have_key(:address)

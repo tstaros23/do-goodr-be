@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :events
-
       get '/search', controller: :search, action: :index
     end
   end

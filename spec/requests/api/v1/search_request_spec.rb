@@ -17,6 +17,8 @@ RSpec.describe 'Search API' do
       get '/api/v1/search', params: search_params
 
       expect(response).to be_successful
+
+
     end
   end
 end

@@ -1,11 +1,13 @@
 class EventSerializer
 
   def self.format_single(event)
+
     {
       type: 'event',
       data:
           [
             {
+            id: event.id,
             name: event.name,
             category: event.category,
             address: event.address,
@@ -25,6 +27,7 @@ class EventSerializer
       data:
           events.map do |obj|
           {
+            id: obj.id,
             organization_id: obj.organization_id,
             name: obj.name,
             category: obj.category,
@@ -46,6 +49,7 @@ class EventSerializer
           events.map do |obj|
           {
             distance: obj[:distance],
+            id: obj[:event].id,
             organization_id: obj[:event].organization_id,
             name: obj[:event].name,
             category: obj[:event].category,
