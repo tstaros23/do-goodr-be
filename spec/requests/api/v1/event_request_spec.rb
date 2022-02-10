@@ -87,10 +87,10 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
   end
   describe "#create" do
     context "when an event is saved" do
-      before do
-        @organization = create(:organization)
-        @event_params = {
-          organization_id: @organization.id,
+      it "sends a confirmation email" do
+        organization = create(:organization)
+        event_params = {
+          organization_id: organization.id,
           name: "Blood Drive",
           category: "Healthcare",
           address: "5200 Wadsworth Blvd, Arvada CO 80001",
@@ -99,9 +99,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
           start_time: "2022-12-31 13:00",
           end_time: "2022-12-31 14:00"
         }
-      end
-      it "sends a confirmation email" do
-        expect { post :create, params: @event_params}.to change { ActionMailer::Base.deliveries.count}.by(1)
+        expect { post :create, params: event_params}.to change { ActionMailer::Base.deliveries.count}.by(1)
       end
     end
   end

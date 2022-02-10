@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe EventMailer, :type => :mailer do
+RSpec.describe EventMailer, type: :mailer do
   describe "notify" do
     before do
       @organization = create(:organization)
