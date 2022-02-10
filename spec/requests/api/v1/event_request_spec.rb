@@ -91,4 +91,24 @@ RSpec.describe 'Event API' do
       expect(response.status).to eq(200)
     end
   end
+  describe "#create" do
+    context "when an event is saved" do
+      before do
+        @organization = create(:organization)
+        @event_params = {
+          organization_id: @organization.id,
+          name: "Blood Drive",
+          category: "Healthcare",
+          address: "5200 Wadsworth Blvd, Arvada CO 80001",
+          description: "Give us your blood",
+          vols_required: 50,
+          start_time: "2022-12-31 13:00",
+          end_time: "2022-12-31 14:00"
+        }
+      end
+      it "sends a confirmation email" do
+        expect { post '/api/v1/events', params: @event_params}.to change { ActionMailer::Base.deliveries.count}.by(1)
+      end
+    end
+  end
 end
