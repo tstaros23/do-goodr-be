@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Search API' do
+RSpec.describe Api::V1::SearchController, type: :controller do
   describe 'GET /api/v1/search' do
     it 'should return events within a zip code radius', :vcr  do
       organization = create(:organization)
@@ -14,7 +14,7 @@ RSpec.describe 'Search API' do
       }
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      get '/api/v1/search', params: search_params
+      get :index, params: search_params
 
       expect(response).to be_successful
 
