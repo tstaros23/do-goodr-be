@@ -10,6 +10,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
         name: "Blood Drive",
         category: "Healthcare",
         address: "5200 Wadsworth Blvd, Arvada CO 80001",
+        phone: "555-555-5555",
         description: "Give us your blood",
         vols_required: 50,
         start_time: "2022-12-31 13:00",
@@ -95,6 +96,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
           category: "Healthcare",
           address: "5200 Wadsworth Blvd, Arvada CO 80001",
           description: "Give us your blood",
+          phone: "555-555-5555",
           vols_required: 50,
           start_time: "2022-12-31 13:00",
           end_time: "2022-12-31 14:00"
