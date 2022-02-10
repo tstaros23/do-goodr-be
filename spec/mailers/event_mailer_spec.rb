@@ -16,5 +16,8 @@ RSpec.describe EventMailer, type: :mailer do
     it "renders the body" do
       expect(@mail.body.encoded).to match("You created a new event. #{@event.name}!")
     end
+    it "delivers the email" do
+      
+    end
   end
 end
