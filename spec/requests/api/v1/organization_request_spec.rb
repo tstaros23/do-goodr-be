@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Organization API' do
+RSpec.describe Api::V1::OrganizationsController, type: :controller do
   describe 'POST /api/v1/organizations' do
     it 'should create a new organization if given valid params' do
       organization_params = {
@@ -12,7 +12,7 @@ RSpec.describe 'Organization API' do
       headers = {"CONTENT_TYPE" => "application/json"}
       created_organization = Event.last
 
-      post '/api/v1/organizations', params: organization_params
+      post :create, params: organization_params
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
@@ -22,7 +22,7 @@ RSpec.describe 'Organization API' do
   describe 'GET /api/v1/organizations' do
     it "should get a list of organizations" do
       events = create_list(:organization, 3)
-      get "/api/v1/organizations"
+      get :index
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -35,7 +35,7 @@ RSpec.describe 'Organization API' do
     it "should return a single organization" do
       organization = create(:organization)
 
-      get "/api/v1/organizations/#{organization.id}"
+      get :index
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -47,12 +47,13 @@ RSpec.describe 'Organization API' do
       organization = create(:organization)
 
       organization_params = {
+        id: organization.id,
         name: "Edited Org",
       }
 
       expect(organization.name).to_not eq("Edited Org")
 
-      patch "/api/v1/organizations/#{organization.id}", params: organization_params
+      patch :update, params: organization_params
       json_organization = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
@@ -65,7 +66,7 @@ RSpec.describe 'Organization API' do
     it "should delete an organization" do
       organization = create(:organization)
 
-      delete "/api/v1/organizations/#{organization.id}"
+      delete :destroy, params: {id: organization.id}
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
