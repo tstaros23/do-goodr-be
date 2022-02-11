@@ -2,7 +2,7 @@ class Api::V1::OrganizationsController < ApplicationController
 
   def index
     orgs = Organization.all
-    render json: OrganizationSerializer.format_multiple(orgs), status: :ok
+    j = render json: OrganizationSerializer.format_multiple(orgs), status: :ok
   end
 
   def show
@@ -30,5 +30,4 @@ class Api::V1::OrganizationsController < ApplicationController
   def org_params
     params.permit(:name, :location, :phone, :email)
   end
-
 end

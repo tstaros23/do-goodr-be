@@ -8,3 +8,4 @@ class Api::V1::SessionsController < ApplicationController
       render json: { errors: { details: 'Organization not found' } }, status: 401
     end
   end
+end
