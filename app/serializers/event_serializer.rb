@@ -55,7 +55,6 @@ class EventSerializer
           {
             id: obj[:event].id,
             distance: obj[:distance],
-            id: obj[:event].id,
             organization_id: obj[:event].organization_id,
             organization_name: obj[:event].organization.name,
             name: obj[:event].name,
