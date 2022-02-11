@@ -22,13 +22,6 @@ RSpec.describe 'Organization API' do
   describe 'GET /api/v1/organizations' do
     it "should get a list of organizations" do
       events = create_list(:organization, 3)
-      # organization = Organization.create!(name: "ARC", location: "Denver, CO", phone: "555-555-5555", email: "denver@arc.org")
-      # organization = Event.create!(name: 'Soup Kitchen', category: 1, address: '11 Revere', description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-      # organization2 = Event.create!(name: 'Blood Drive', category: 2, address: '12 Colfax', description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", duration: 2)
-
-      # org = create :organization
-      # organization1 = create :organization, { organization: org, address: "5200 Wadsworth Blvd, Arvada CO 80001"}
-
       get "/api/v1/organizations"
 
       expect(response).to be_successful
