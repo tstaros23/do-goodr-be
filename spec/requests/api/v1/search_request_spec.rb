@@ -17,8 +17,6 @@ RSpec.describe Api::V1::SearchController, type: :controller do
       get :index, params: search_params
 
       expect(response).to be_successful
-
-
     end
   end
 end
