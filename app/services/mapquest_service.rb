@@ -16,5 +16,4 @@ class MapquestService
   def self.conn
     Faraday.new(url: "http://www.mapquestapi.com", params: { key: ENV['MAPQUEST_API_KEY'] })
   end
-
 end
