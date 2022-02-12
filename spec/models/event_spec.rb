@@ -39,6 +39,8 @@ RSpec.describe Event, type: :model do
 
       it 'returns only events within distance radius' do
         expect(Event.distance_filter(80001, 5)).to eq([{distance: 0.64, event: @event2}])
+        expect(Event.distance_filter(80001, 5)).to_not include(@event3)
+
       end
 
       it 'returns events sorted by distance ascending' do
@@ -46,7 +48,7 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    describe '.organization_filter', :vcr do
+    describe '.organization_filter' do
       before do
         @organization1 = create(:organization)
         @organization2 = create(:organization)
@@ -57,6 +59,7 @@ RSpec.describe Event, type: :model do
 
       it 'returns only events associated with organization' do
         expect(Event.organization_filter(@organization1.id)).to eq([@event1, @event2])
+        expect(Event.organization_filter(@organization1.id)).to_not include(@event3)
       end
     end
   end

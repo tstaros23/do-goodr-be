@@ -17,13 +17,28 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
         end_time: "2022-12-31 14:00"
       }
       headers = {"CONTENT_TYPE" => "application/json"}
-      created_event = Event.last
 
       post :create, params: event_params
+      created_event = Event.last
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
     end
+    # it 'should not create a new event if not given valid params' do
+    #   organization = create(:organization)
+    #
+    #   event_params = {
+    #     name: "Blood Drive",
+    #   }
+    #   headers = {"CONTENT_TYPE" => "application/json"}
+    #
+    #   post :create
+    #   # post 'api/v1/events', params: event_params
+    #   created_event = Event.last
+    #   require "pry"; binding.pry
+    #   expect(response).to_not be_successful
+    #   expect(response.status).to eq(401)
+    # end
   end
 
   describe 'GET /api/v1/events' do
@@ -46,7 +61,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
       organization = create(:organization)
       event = create :event, { organization: organization }
 
-      get :index
+      get :show, params: { id: event.id }
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -88,7 +103,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
   end
   describe "#create" do
     context "when an event is saved" do
-      before  do
+      before do
         @organization = create(:organization)
         @event_params = {
           organization_id: @organization.id,

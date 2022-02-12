@@ -35,7 +35,7 @@ RSpec.describe Api::V1::OrganizationsController, type: :controller do
     it "should return a single organization" do
       organization = create(:organization)
 
-      get :index
+      get :show, params: { id: organization.id}
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
