@@ -11,13 +11,13 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    organization = @event.organization
-    if @event.save
-      EventMailer.with(event: @event, organization: organization).new_event_email.deliver
-      render json: EventSerializer.format_single(@event), status: :created
+    event = Event.new(event_params)
+    # organization = event.organization
+    if event.save
+      NewMailerWorker.perform_async(event.id) #.name, organization.email)
+      render json: EventSerializer.format_single(event), status: :created
     else
-      render json: {errors: {details: "Fill in correct information"}}
+      render json: {errors: {details: "Invalid event details."}}
     end
   end
 
