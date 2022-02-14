@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::EventsController, type: :controller  do
   describe 'POST /api/v1/events' do
-    it 'should create a new event if given valid params' do
+    xit 'should create a new event if given valid params' do
       organization = create(:organization)
 
       event_params = {
