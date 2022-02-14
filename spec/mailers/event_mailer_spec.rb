@@ -5,7 +5,7 @@ RSpec.describe EventMailer, type: :mailer do
     before do
       @organization = create(:organization)
       @event = create(:event, organization: @organization)
-      @mail = EventMailer.with(event: @event, organization: @organization).new_event_email
+      @mail = EventMailer.with(@event.id).new_event_email
     end
     it "renders the headers" do
       expect(@mail.subject).to eq("You created a new event!")
