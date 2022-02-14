@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::EventsController, type: :controller  do
   describe 'POST /api/v1/events' do
-    xit 'should create a new event if given valid params' do
+    it 'should create a new event if given valid params' do
       organization = create(:organization)
 
       event_params = {
@@ -10,7 +10,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
         name: "Blood Drive",
         category: "Healthcare",
         address: "5200 Wadsworth Blvd, Arvada CO 80001",
-        phone: "555-555-5555",
+        phone: "928-779-7857",
         description: "Give us your blood",
         vols_required: 50,
         start_time: "2022-12-31 13:00",
@@ -102,24 +102,32 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
     end
   end
   describe "#create" do
+    include ActiveJob::TestHelper
     context "when an event is saved" do
       before do
         @organization = create(:organization)
-        @event_params = {
+        @event = Event.create({
           organization_id: @organization.id,
           name: "Blood Drive",
           category: "Healthcare",
           address: "5200 Wadsworth Blvd, Arvada CO 80001",
           description: "Give us your blood",
-          phone: "555-555-5555",
+          phone: "928-779-7857",
           vols_required: 50,
           start_time: "2022-12-31 13:00",
           end_time: "2022-12-31 14:00"
-        }
+        })
       end
-      xit "sends a confirmation email" do
-        expect { post :create, params: @event_params}.to change { ActionMailer::Base.deliveries.count}.by(1)
+      it 'job is created' do
+# require "pry"; binding.pry
+        ActiveJob::Base.queue_adapter = :test
+        expect {
+          EventMailer.new_event_email.deliver
+        }.to have_enqueued_job.on_queue('mailers'), params: @event.id
       end
+      # it "sends a confirmation email" do
+      #   expect { post :create, params: @event_params}.to change { ActiveJob::Base.deliveries.count}.by(1)
+      # end
     end
   end
 end
