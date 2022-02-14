@@ -25,6 +25,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: do-goodr-be_test
+      - image: redis
     environment:
       BUNDLE_PATH: vendor/bundle
       BUNDLE_JOBS: 3
@@ -61,7 +62,6 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run: sudo apt install -y postgresql-client || true
-      - run: sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
