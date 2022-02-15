@@ -38,7 +38,7 @@ RSpec.describe Api::V1::SearchController, type: :controller do
 
       expect(response).not_to be_successful
       expect(response.status).to eq 400
-      expect(event_search[:errors][:details]).to eq('Invalid zip code')
+      expect(event_search[:errors][:details]).to eq('No events found')
     end
   end
 end
