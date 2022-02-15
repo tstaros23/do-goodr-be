@@ -1,4 +1,7 @@
-class ApplicationController < ActionController::Base
-  skip_forgery_protection
-  handle_api_errors(format: :json_api, backtrace: false)
+class ApplicationController < ActionController::API
+  private
+
+  def error_message(errors)
+    errors.full_messages.join(', ')
+  end
 end

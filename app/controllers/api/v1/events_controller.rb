@@ -12,7 +12,6 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     event = Event.new(event_params)
-    # organization = event.organization
     if event.save
       render json: EventSerializer.format_single(event), status: :created
       NewMailerWorker.perform_async(event.id) #.name, organization.email)
@@ -36,5 +35,4 @@ class Api::V1::EventsController < ApplicationController
   def event_params
     params.permit(:name, :category, :address, :phone, :description, :vols_required, :organization_id, :start_time, :end_time)
   end
-
 end
