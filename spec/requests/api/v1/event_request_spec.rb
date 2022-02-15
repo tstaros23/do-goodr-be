@@ -118,7 +118,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
           end_time: "2022-12-31 14:00"
         })
       end
-      it 'job is created' do
+      xit 'job is created' do
 # require "pry"; binding.pry
         ActiveJob::Base.queue_adapter = :test
         expect {
