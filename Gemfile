@@ -32,12 +32,18 @@ gem 'shoulda-matchers'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'sidekiq'
+gem 'valid_email2'
+gem 'phonelib'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec_junit_formatter'
 end
+
+# group :development, :production do
+#   gem 'phonelib'
+# end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
