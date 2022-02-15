@@ -2,7 +2,7 @@ class Api::V1::OrganizationsController < ApplicationController
 
   def index
     orgs = Organization.all
-    j = render json: OrganizationSerializer.format_multiple(orgs), status: :ok
+    render json: OrganizationSerializer.format_multiple(orgs), status: :ok
   end
 
   def show

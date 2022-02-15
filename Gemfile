@@ -31,7 +31,6 @@ gem 'faraday'
 gem 'shoulda-matchers'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-gem 'api_error_handler'
 gem 'sidekiq'
 gem 'valid_email2'
 gem 'phonelib'

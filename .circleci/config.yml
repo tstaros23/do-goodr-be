@@ -25,6 +25,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: do-goodr-be_test
+      - image: redis
     environment:
       BUNDLE_PATH: vendor/bundle
       BUNDLE_JOBS: 3
@@ -55,7 +56,7 @@ jobs:
       - save_cache:
           key: fast-inlet-74665-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - vendor/bundle      
+            - vendor/bundle
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
