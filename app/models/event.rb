@@ -1,7 +1,10 @@
 class Event < ApplicationRecord
   belongs_to :organization
 
+  before_save :normalize_phone
+
   validates_presence_of :name, :category, :address, :description, :phone, :vols_required, :organization_id, :start_time, :end_time
+  validates :phone, phone: true
 
   enum category: {"Nursing Home" => 0, "Grounds Cleanup" => 1, "Animal Care" => 2, "Campaigning" => 3, "Food Service" => 4, "Youth Mentorship" => 5, "Community Development" => 6, "Healthcare" => 7, "Other" => 8}
 
@@ -23,5 +26,11 @@ class Event < ApplicationRecord
 
   def self.organization_filter(org_id)
     where "organization_id = ?", org_id
+  end
+
+  private
+
+  def normalize_phone
+    phone = Phonelib.parse(phone).full_e164
   end
 end

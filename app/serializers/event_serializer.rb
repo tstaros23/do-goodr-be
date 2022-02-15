@@ -13,7 +13,7 @@ class EventSerializer
             name: event.name,
             category: event.category,
             address: event.address,
-            phone: event.phone,
+            phone: Phonelib.parse(event.phone).sanitized,
             description: event.description,
             vols_required: event.vols_required,
             date: Time.at(event.start_time).strftime('%m/%d/%Y'),
