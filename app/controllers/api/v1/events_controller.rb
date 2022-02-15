@@ -11,13 +11,12 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    organization = @event.organization
-    if @event.save
-      EventMailer.with(event: @event, organization: organization).new_event_email.deliver
-      render json: EventSerializer.format_single(@event), status: :created
+    event = Event.new(event_params)
+    if event.save
+      render json: EventSerializer.format_single(event), status: :created
+      NewMailerWorker.perform_async(event.id) #.name, organization.email)
     else
-      render json: {errors: {details: "Fill in correct information"}}
+      render json: {errors: {details: "Invalid event details. #{event.errors.full_messages}"}}, status: :bad_request
     end
   end
 
@@ -36,5 +35,4 @@ class Api::V1::EventsController < ApplicationController
   def event_params
     params.permit(:name, :category, :address, :phone, :description, :vols_required, :organization_id, :start_time, :end_time)
   end
-
 end

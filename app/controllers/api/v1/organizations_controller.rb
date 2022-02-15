@@ -30,5 +30,4 @@ class Api::V1::OrganizationsController < ApplicationController
   def org_params
     params.permit(:name, :location, :phone, :email)
   end
-
 end

@@ -6,18 +6,24 @@ class Event < ApplicationRecord
   enum category: {"Nursing Home" => 0, "Grounds Cleanup" => 1, "Animal Care" => 2, "Campaigning" => 3, "Food Service" => 4, "Youth Mentorship" => 5, "Community Development" => 6, "Healthcare" => 7, "Other" => 8}
 
   def self.future_events
-    where "start_time > ? ", DateTime.now
+    where "start_time > ?", DateTime.now
   end
 
   def self.distance_filter(zip, distance)
     events = MapquestFacade.event_search(zip, distance)
     e = events.filter_map do |event|
-      if event[:distance] < distance.to_f
+      if event[:distance].nil?
+        nil
+      elsif event[:distance] < distance.to_f
         event
       end
     end
     e.sort_by do |k|
       k[:distance]
     end
+  end
+
+  def self.organization_filter(org_id)
+    where "organization_id = ?", org_id
   end
 end

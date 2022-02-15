@@ -10,16 +10,16 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
         name: "Blood Drive",
         category: "Healthcare",
         address: "5200 Wadsworth Blvd, Arvada CO 80001",
-        phone: "555-555-5555",
+        phone: "928-779-7857",
         description: "Give us your blood",
         vols_required: 50,
         start_time: "2022-12-31 13:00",
         end_time: "2022-12-31 14:00"
       }
       headers = {"CONTENT_TYPE" => "application/json"}
-      created_event = Event.last
 
       post :create, params: event_params
+      created_event = Event.last
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
@@ -46,7 +46,7 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
       organization = create(:organization)
       event = create :event, { organization: organization }
 
-      get :index
+      get :show, params: { id: event.id }
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -87,23 +87,44 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
     end
   end
   describe "#create" do
+    include ActiveJob::TestHelper
     context "when an event is saved" do
-      before  do
+      before do
+        ActiveJob::Base.queue_adapter = :test
         @organization = create(:organization)
-        @event_params = {
+        @event = Event.create({
           organization_id: @organization.id,
           name: "Blood Drive",
           category: "Healthcare",
           address: "5200 Wadsworth Blvd, Arvada CO 80001",
           description: "Give us your blood",
-          phone: "555-555-5555",
+          phone: "928-779-7857",
           vols_required: 50,
           start_time: "2022-12-31 13:00",
           end_time: "2022-12-31 14:00"
-        }
+        })
+        @mail = EventMailer.with(@event.id).new_event_email
       end
-      it "sends a confirmation email" do
-        expect { post :create, params: @event_params}.to change { ActionMailer::Base.deliveries.count}.by(1)
+
+      it 'job is created' do
+        expect {@mail.deliver_later}.to have_enqueued_job.on_queue('mailers')
+      end
+
+      it "event email is sent" do
+        expect {
+          perform_enqueued_jobs do
+           @mail.deliver_later
+         end
+       }.to change { ActionMailer::Base.deliveries.size}.by(1)
+      end
+
+      it "event email is sent to the right user" do
+        perform_enqueued_jobs do
+          @mail.deliver_later
+        end
+
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.to[0]).to eq @organization.email
       end
     end
   end
