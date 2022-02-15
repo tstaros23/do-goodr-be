@@ -6,8 +6,12 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def show
-    event = Event.find(params[:id])
-    render json: EventSerializer.format_single(event), status: :ok
+    if Event.exists?(params[:id])
+      event = Event.find(params[:id])
+      render json: EventSerializer.format_single(event), status: :ok
+    else
+      render json: {errors: {details: "Event doesnt exist"}}, status: :not_found
+    end
   end
 
   def create
@@ -21,13 +25,26 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def update
-    event = Event.update(params[:id], event_params)
-    render json: EventSerializer.format_single(event), status: :ok
+    event = Event.find(params[:id])
+    if !event.nil? && !params[:organization_id].present?
+      updated_event = Event.update(params[:id], event_params)
+      render json: EventSerializer.format_single(updated_event), status: :ok
+    elsif
+      params[:organization_id].present?
+      organization = Organization.find(params[:id])
+      updated_event = Event.update(params[:id], event_params)
+      return  render json: {errors: {details: "Organization doesnt exist"}}, status: :not_found if organization.nil?
+    end
   end
 
   def destroy
-    event = Event.destroy(params[:id])
-    render json: EventSerializer.format_single(event), status: :ok
+    if Event.exists?(params[:id])
+      event = Event.find(params[:id])
+      event.destroy
+      render json: EventSerializer.format_single(event), status: :ok
+    else
+      render json: {errors: {details: "Event doesnt exist"}}, status: :not_found
+    end
   end
 
   private
