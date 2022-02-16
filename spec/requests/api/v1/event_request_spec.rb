@@ -51,6 +51,16 @@ RSpec.describe Api::V1::EventsController, type: :controller  do
       expect(response).to be_successful
       expect(response.status).to eq(200)
     end
+
+    it "only returns an event that exists" do
+      organization = create(:organization)
+      get :show, params: { id: "DOES NOT MATCH"}
+
+      expect(response).not_to be_successful
+      expect(response.status).to eq(404)
+      event_show = JSON.parse(response.body, symbolize_names: true)
+      expect(event_show[:errors][:details]).to eq('Event doesnt exist')
+    end
   end
 
   describe 'PATCH /api/v1/events/:id' do

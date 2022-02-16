@@ -32,8 +32,9 @@ class Api::V1::EventsController < ApplicationController
     elsif
       params[:organization_id].present?
       organization = Organization.find(params[:id])
-      updated_event = Event.update(params[:id], event_params)
       return  render json: {errors: {details: "Organization doesnt exist"}}, status: :not_found if organization.nil?
+    else
+      render json: {errors: {details: "Event doesnt exist"}}, status: :not_found
     end
   end
 
