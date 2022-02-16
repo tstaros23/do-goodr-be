@@ -21,7 +21,7 @@ RSpec.describe Api::V1::SearchController, type: :controller do
   end
 
   describe 'Sad Path' do
-    it "returns a bad request for a zipcode that does not exist", :vcr do
+    it "returns a bad request for a zipcode that does not have events near it", :vcr do
       organization = create(:organization)
       event1 = Event.create!(name: 'Soup Kitchen', category: 1, address: '1625 Fenton St., Lakewood CO 80214', phone: 9287787857, description: 'Good food', vols_required: 5, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
       event2 = Event.create!(name: 'Blood Drive', category: 2, address: '5280 Wadsworth Blvd, Arvada CO', phone: 9287787857, description: 'Good blood', vols_required: 1, organization_id: organization.id, start_time: "2022-12-31 13:00", end_time: "2022-12-31 14:00")
