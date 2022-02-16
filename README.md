@@ -31,11 +31,12 @@ To consume Do Goodr endpoints locally, run `bundle exec sidekiq`, `redis-server`
 
 ### Endpoints ###
 *Notes:*
-*- The application is fully deployed and can be accessed using `https://do-goodr-be.herokuapp.com` as the base URL, in addition to the locally-hosted option described above. In addition, this document describes endpoints that are not currently being consumed by the Do Goodr front-end application, to allow for future growth.*
 
-*- Dynamic segments of the URI are show is a preceeding colon, as `/:dynamic_segment`. These would need to be replaced with the appropriate corresponding segment, typically an event or organization id, such as `/1`. For visual clarity, query params are show detached from the URI and without supplying the values, but should be enchained with URL/URI, with values defined, as shown in this example: `https://do-goodr-be.herokuapp.com/api/v1/search?zip=80214&distance=10`.*
+*The application is fully deployed and can be accessed using `https://do-goodr-be.herokuapp.com` as the base URL, in addition to the locally-hosted option described above. In addition, this document describes endpoints that are not currently being consumed by the Do Goodr front-end application, to allow for future growth.*
 
-*- Categories for events are defined as `enum category: {"Nursing Home" => 0, "Grounds Cleanup" => 1, "Animal Care" => 2, "Campaigning" => 3, "Food Service" => 4, "Youth Mentorship" => 5, "Community Development" => 6, "Healthcare" => 7, "Other" => 8}`. Either the string or the integer may be used when referring to categories.*
+*Dynamic segments of the URI are show is a preceeding colon, as `/:dynamic_segment`. These would need to be replaced with the appropriate corresponding segment, typically an event or organization id, such as `/1`. For visual clarity, query params are show detached from the URI and without supplying the values, but should be enchained with URL/URI, with values defined, as shown in this example: `https://do-goodr-be.herokuapp.com/api/v1/search?zip=80214&distance=10`. Any date/time params should be supplied as `YYYY-MM-DD HH:MM`*
+
+*Categories for events are defined as `enum category: {"Nursing Home" => 0, "Grounds Cleanup" => 1, "Animal Care" => 2, "Campaigning" => 3, "Food Service" => 4, "Youth Mentorship" => 5, "Community Development" => 6, "Healthcare" => 7, "Other" => 8}`. Either the string or the integer may be used when referring to categories.*
 
 **Events**
   
@@ -48,7 +49,7 @@ Sample Response:
 
 ```
 
-Request GET `api/v1/events/:event_id` to return a specific event.
+Request GET `/api/v1/events/:event_id` to return a specific event.
 Accepts no query params. 
 
 Sample Response:
@@ -58,8 +59,8 @@ Sample Response:
 ```
 
  
-Request POST `api/v1/events` to create a new event
-Query params: `?organization_id=&name=&category=
+Request POST `/api/v1/events` to create a new event.
+Query params: `?organization_id=&name=&category=&address=&description=&phone=&vols_required&start_time=&end_time=`.
 
 Sample Response:
 
@@ -68,7 +69,8 @@ Sample Response:
 ```
 
  
-Request PATCH `api/v1/events/:event_id` to edit an event
+Request PATCH `/api/v1/events/:event_id` to edit an event.
+Query params: `?organization_id=&name=&category=&address=&description=&phone=&vols_required&start_time=&end_time=`.
 
 Sample Response:
 
@@ -77,7 +79,8 @@ Sample Response:
 ```
 
  
-Request DELETE `api/v1/events/:event_id` to delete an event
+Request DELETE `/api/v1/events/:event_id` to delete an event. 
+Accepts no query params.
 
 Sample Response:
 
@@ -87,7 +90,8 @@ Sample Response:
 
 **Organizations**
 
-Request GET `api/v1/organizations` to return all organizations.
+Request GET `/api/v1/organizations` to return all organizations.
+Accepts no query params.
 
 Sample Response:
 
@@ -96,7 +100,28 @@ Sample Response:
 ```
 
  
-Request GET `api/v1/organizations/:organization_id` to return a specific organization
+Request GET `/api/v1/organizations/:organization_id` to return a specific organization.
+Accepts no query params.
+
+Sample Response:
+
+```
+
+```
+
+
+Request GET `/api/v1/organizations/:organization_id/events` to return all events associated with a specific organization.
+Accepts no query params.
+
+Sample Response:
+
+```
+
+```
+
+
+Request POST `/api/v1/organizations/` to create a new organization.
+Query params: `?name=&location=&phone=&email=`.
 
 Sample Response:
 
@@ -106,13 +131,48 @@ Sample Response:
 
  
  
+Request PATCH `/api/v1/organizations/:organization_id` to create a new organization.
+Query params: `?name=&location=&phone=&email=`.
 
-Contacts
-Matt Holmes
-Ted Staros 
+Sample Response:
 
-Acknowledgements
-Do-Goodr Front End Team
-API from Map Quest
+```
+
+```
+
+ 
+Request DELETE `/api/v1/organizations/:organization_id` to delete a new organization.
+Accepts no query params.
+
+Sample Response:
+
+```
+
+```
+
+
+**Search**
+
+Request GET `/api/v1/search`.
+Query params: `?zip=&distance=`.
+ 
+Sample Response:
+
+```
+
+```
+ 
+
+### Contacts ###
+- Matt Holmes     |  [Github](https://github.com/matthewjholmes)   |   [LinkedIn](https://www.linkedin.com/in/matthew-j-holmes/)
+- Ted Staros      |  [Github](https://github.com/matthewjholmes)   |   [LinkedIn](https://www.linkedin.com/in/ted-staros/)
+
+**Acknowledgements**
+Do-Goodr Front End Team:
+- Adam Burgess
+- Colgan Meanor
+- Michele Comfort
+
+Map Quest API
 
 
