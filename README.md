@@ -1,5 +1,5 @@
 ## Do Goodr Backend ##
-Do Goodr Backend a back-end application that exposes an API to support the user-facing application to which allows individuals to find volunteer opportunities near to them. The API exposed will allow front-end developers to show users organizations and events, and to search for them by zip code.
+Do Goodr Backend a back-end application that exposes an API to support the user-facing application which allows individuals to find volunteer opportunities near to them. The API exposed will allow front-end developers to show users organizations and events, and to search for them by zip code.
 
 The goal of this project was to deploy a service-oriented architecture to expose an API that satisfied the front-end team’s requirements.
 
@@ -25,7 +25,7 @@ Run `bundle install` to install gem packages.
 
 Run `rails db:{drop,create,migrate}` to set up the database.
 
-Run `bundle exec figaro install` then add your API key to the config/application.yml file as: MAPQUEST_API_KEY for MapQuest. To use mailer functionality, REDIS and email variables will need to be defined as well, with the following keys: REDIS_PROVIDER, MAILER_EMAIL, MAILER_PASSWORD. `config/environments/production.rb` & `development.rb` may also need to be configured with your email server's needs.
+Run `bundle exec figaro install` then add your API key to the `config/application.yml` file as: `MAPQUEST_API_KEY` for MapQuest. To use mailer functionality, Redis and email variables will need to be defined as well, with the following keys: `REDIS_PROVIDER`, `MAILER_EMAIL`, and `MAILER_PASSWORD`. `config/environments/production.rb` & `development.rb` may also need to be configured with your email server's needs.
 
 To consume Do Goodr endpoints locally, run `bundle exec sidekiq`, `redis-server`, and `rails s` (all as different procceses) and navigate to `localhost:3000`. 
 
