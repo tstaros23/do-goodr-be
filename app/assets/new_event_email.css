@@ -1,0 +1,25 @@
+body {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+
+  header {
+    font-size: 18px
+  }
+  
+  .email-message {
+    font-size: 18px
+  }
+  
+  .event-details-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: 1px solid #1864AB;
+    margin: auto;
+    padding: 2%;
+    border-radius: 3px;
+  }
+  
