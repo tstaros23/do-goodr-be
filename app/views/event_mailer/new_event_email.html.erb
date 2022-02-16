@@ -1,10 +1,28 @@
+import '../assets/new_event_email.css'
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link rel="stylesheet" href="../assets/new_event_email.css">
   </head>
   <body>
-
-    <p>You created a new event. <%= @event.name %>!</p>
+    <header>
+      <h1>Do Goodr</h1>
+    </header>
+    <div class='email-message'>
+      <p> Congratulations <%= @event.organization_name %> - your volunteering opportunity has successfully been posted to Do Goodr! The details of this event are below:</p>
+    </div>
+    <div class='event-details-container'>
+      <p> Event Name: <%= @event.name %> </p>
+      <p> Address: <%= @event.address %> </p>
+      <p> Type of Event: <%= @event.category %> </p>
+      <p> Date: <%= @event.date %> </p>
+      <p> Time: <%= @event.start_time %> - <%= @event.end_time %>  </p>
+      <p> Volunteers Requested: <%= @event.vols_required %> </p>
+    </div>
+    <div>
+      <p>Please visit your Do Goodr Dashboard to manage further.</p>
+    </div>
   </body>
 </html>
