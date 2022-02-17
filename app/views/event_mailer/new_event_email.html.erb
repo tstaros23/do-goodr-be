@@ -2,20 +2,21 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <link rel="stylesheet" href="../../assets/new_event_email.css">
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body style="margin:auto;width:70%;display:flex;flex-direction:column;align-items:center;font-family:'Coming Soon';">
     <header>
       <h1>Do Goodr</h1>
-    </header>
-    <div class='email-message'>
+    </header style="font-size:18px;">
+    <div style="font-size:18px;">
       <p> Congratulations <%= @event.organization.name %> - your volunteering opportunity has successfully been posted to Do Goodr! The details of this event are below:</p>
     </div>
-    <div class='event-details-container'>
+    <div style="display:flex;flex-direction:column;width:fit-content;border:1px solid #1864AB;margin:auto;padding:2%;border-radius:3px;">
       <p> Event Name: <%= @event.name %> </p>
       <p> Address: <%= @event.address %> </p>
       <p> Type of Event: <%= @event.category %> </p>
-      <p> Date: <%= @event.start_time.strftime("%m/%d%Y") %> </p>
+      <p> Date: <%= @event.start_time.strftime("%m/%d/%Y") %> </p>
+
       <p> Time: <%= @event.start_time.strftime("%H:%M%p") %> - <%= @event.end_time.strftime("%H:%M%p") %>  </p>
       <p> Volunteers Requested: <%= @event.vols_required %> </p>
     </div>
