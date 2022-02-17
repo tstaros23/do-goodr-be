@@ -7,7 +7,7 @@ class Api::V1::SearchController < ApplicationController
       render json: {errors: {details: "Invalid ZIP code."}}, status: :bad_request
     end
     if events.empty?
-      render json: {errors: {details: "No events found"}}, status: :bad_request #Talk to FE about changing to 200series and different language.
+      render json: {errors: {details: "No events found"}}, status: :bad_request
     else
       render json: EventSerializer.format_search(events), status: :ok
     end

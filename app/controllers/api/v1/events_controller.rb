@@ -18,7 +18,7 @@ class Api::V1::EventsController < ApplicationController
     event = Event.new(event_params)
     if event.save
       render json: EventSerializer.format_single(event), status: :created
-      NewMailerWorker.perform_async(event.id) #.name, organization.email)
+      NewMailerWorker.perform_async(event.id)
     else
       render json: {errors: {details: "Invalid event details. #{event.errors.full_messages}"}}, status: :bad_request
     end
