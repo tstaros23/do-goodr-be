@@ -1,7 +1,7 @@
 ## Do Goodr Backend ##
-Do Goodr Backend a back-end application that exposes an API to support the user-facing application which allows individuals to find volunteer opportunities near to them. The API exposed will allow front-end developers to show users organizations and events, and to search for them by zip code.
+Do Goodr Backend is a back-end application that exposes an API to support the user-facing application which allows individuals to find volunteer opportunities within their area. The exposed API will allow front-end developers to display users, organizations and events. Users will be able to search via zip code.
 
-The goal of this project was to deploy a service-oriented architecture to expose an API that satisfied the front-end team’s requirements.
+The goal of this project was to deploy a service-oriented architecture to expose an API that would satisfy the front-end team’s requirements.
 
 Main functional accomplishments:
 Expose an API for CRUD functionality.
