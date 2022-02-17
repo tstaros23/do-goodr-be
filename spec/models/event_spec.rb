@@ -46,6 +46,10 @@ RSpec.describe Event, type: :model do
       it 'returns events sorted by distance ascending' do
         expect(Event.distance_filter(80001, 10)).to eq([{distance: 0.64, event: @event2}, {distance: 5.542, event: @event1}, {distance: 8.414, event: @event3}])
       end
+
+      it 'returns error if invalid zip' do
+        expect{Event.distance_filter(11111, 20)}.to raise_error(Event::InvalidZipError)
+      end
     end
 
     describe '.organization_filter' do

@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  class InvalidZipError < StandardError
+  end
   belongs_to :organization
 
   before_save :normalize_phone
@@ -16,9 +18,11 @@ class Event < ApplicationRecord
     events = MapquestFacade.event_search(zip, distance)
     e = events.filter_map do |event|
       if event[:distance].nil?
-        nil
+        raise InvalidZipError.new
       elsif event[:distance] < distance.to_f
         event
+      else
+        nil
       end
     end
     e.sort_by do |k|
