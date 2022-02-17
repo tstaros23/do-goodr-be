@@ -15,19 +15,14 @@ Develop additional functions that support future application growth.
 - Sidekiq
 - Redis
 - API key from Mapquest
-
-- And a SMTP-configured email server if email support is desired.
+- SMTP-configured email server if email support is desired.
 
 ### Installation ###
-Fork & clone this repo.
-
-Run `bundle install` to install gem packages.
-
-Run `rails db:{drop,create,migrate}` to set up the database.
-
-Run `bundle exec figaro install` then add your API key to the `config/application.yml` file as: `MAPQUEST_API_KEY` for MapQuest. To use mailer functionality, Redis and email variables will need to be defined as well, with the following keys: `REDIS_PROVIDER`, `MAILER_EMAIL`, and `MAILER_PASSWORD`. `config/environments/production.rb` & `development.rb` may also need to be configured with your email server's needs.
-
-To consume Do Goodr endpoints locally, run `bundle exec sidekiq`, `redis-server`, and `rails s` (all as different procceses) and navigate to `localhost:3000`. 
+1. Fork & clone this repo.
+2. Run `bundle install` to install gem packages.
+3. Run `rails db:{drop,create,migrate}` to set up the database.
+4. Run `bundle exec figaro install` then add your API key to the `config/application.yml` file as: `MAPQUEST_API_KEY` for MapQuest. To use mailer functionality, Redis and email variables will need to be defined as well, with the following keys: `REDIS_PROVIDER`, `MAILER_EMAIL`, and `MAILER_PASSWORD`. `config/environments/production.rb` & `development.rb` may also need to be configured with your email server's needs.
+5. To consume Do Goodr endpoints locally, run `bundle exec sidekiq`, `redis-server`, and `rails s` (all as different procceses) and navigate to `localhost:3000`. 
 
 ### Endpoints ###
 *Notes:*
