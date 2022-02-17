@@ -14,7 +14,7 @@ RSpec.describe EventMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(@mail.body.encoded).to match("You created a new event. #{@event.name}!")
+      expect(@mail.body.encoded).to match("Please visit your Do Goodr Dashboard to manage further.")
     end
   end
 end
