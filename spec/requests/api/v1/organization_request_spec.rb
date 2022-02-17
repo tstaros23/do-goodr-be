@@ -6,7 +6,7 @@ RSpec.describe Api::V1::OrganizationsController, type: :controller do
       organization_params = {
         name: "Example Organization",
         location: "Denver, CO",
-        phone: "555-555-5555",
+        phone: "928-779-7857",
         email: "example@example.com",
       }
       headers = {"CONTENT_TYPE" => "application/json"}

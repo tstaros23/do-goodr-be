@@ -2,12 +2,16 @@ class Api::V1::OrganizationsController < ApplicationController
 
   def index
     orgs = Organization.all
-    j = render json: OrganizationSerializer.format_multiple(orgs), status: :ok
+    render json: OrganizationSerializer.format_multiple(orgs), status: :ok
   end
 
   def show
-    org = Organization.find(params[:id])
-    render json: OrganizationSerializer.format_single(org), status: :ok
+    if Organization.exists?(params[:id])
+      org = Organization.find(params[:id])
+      render json: OrganizationSerializer.format_single(org), status: :ok
+    else
+      render json: {errors: {details: "Organization doesnt exist"}}, status: :not_found
+    end
   end
 
   def create
@@ -16,13 +20,22 @@ class Api::V1::OrganizationsController < ApplicationController
   end
 
   def update
-    org = Organization.update(params[:id], org_params)
-    render json: OrganizationSerializer.format_single(org), status: :ok
+    if Organization.exists?(params[:id])
+      org = Organization.update(params[:id], org_params)
+      render json: OrganizationSerializer.format_single(org), status: :ok
+    else
+      render json: {errors: {details: "Organization doesnt exist"}}, status: :not_found
+    end
   end
 
   def destroy
-    org = Organization.destroy(params[:id])
-    render json: OrganizationSerializer.format_single(org), status: :ok
+    if Organization.exists?(params[:id])
+      org = Organization.find(params[:id])
+      org.destroy
+      render json: OrganizationSerializer.format_single(org), status: :ok
+    else
+      render json: {errors: {details: "Organization doesnt exist"}}, status: :not_found
+    end
   end
 
   private

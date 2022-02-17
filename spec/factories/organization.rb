@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :organization do
     name {Faker::Company.name}
     location {Faker::Address.city}
-    phone {Faker::PhoneNumber.cell_phone}
+    phone {"9287787857"}
     email {Faker::Internet.email}
   end
 end
