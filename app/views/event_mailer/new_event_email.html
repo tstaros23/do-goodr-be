@@ -15,7 +15,7 @@
       <p> Event Name: <%= @event.name %> </p>
       <p> Address: <%= @event.address %> </p>
       <p> Type of Event: <%= @event.category %> </p>
-      <p> Date: <%= @event.start_time.strftime("%m/%d%Y") %> </p>
+      <p> Date: <%= @event.start_time.strftime("%m/%d/%Y") %> </p>
       <p> Time: <%= @event.start_time.strftime("%H:%M%p") %> - <%= @event.end_time.strftime("%H:%M%p") %>  </p>
       <p> Volunteers Requested: <%= @event.vols_required %> </p>
     </div>
