@@ -33,6 +33,8 @@ Develop additional functions that support future application growth.
 
 *Categories for events are defined as `enum category: {"Nursing Home" => 0, "Grounds Cleanup" => 1, "Animal Care" => 2, "Campaigning" => 3, "Food Service" => 4, "Youth Mentorship" => 5, "Community Development" => 6, "Healthcare" => 7, "Other" => 8}`. Either the string or the integer may be used when referring to categories.*
 
+**Schema**
+![Screen Shot 2022-06-03 at 12 09 18 PM](https://user-images.githubusercontent.com/81131454/171921894-33a2351a-bb16-427e-8e88-cea96d218f55.png)
 
 **Events**
   
